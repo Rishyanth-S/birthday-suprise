@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Surprise for You ❤️</title>
+
+    <!-- CDNs -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;1,700&family=Dancing+Script:wght@700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+
+<body class="bg-[#050208] text-white overflow-hidden selection:bg-pink-500/30">
+    <!-- UI Elements -->
+    <div id="progress-bar"></div>
+    <div class="bg-mesh"></div>
+    <div id="particle-container" class="fixed inset-0 pointer-events-none z-0"></div>
+
+    <!-- Custom Cursor -->
+    <div id="cursor-follow"></div>
+    <div id="cursor-glow"></div>
+
+    <!-- 1. LOCK SCREEN -->
+    <section id="lock-screen" class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-black">
+        <div class="glass-card p-10 md:p-20 text-center max-w-xl mx-4 relative group">
+            <span class="text-pink-400 font-bold uppercase tracking-[0.4em] text-xs mb-6 block">Private Surprise</span>
+            <h1 class="text-3xl md:text-5xl text-luxury mb-12 leading-tight">A Special Surprise <br> <span class="text-gradient">Starts Here</span></h1>
+
+            <div id="countdown-container" class="flex gap-4 md:gap-8 justify-center mb-12">
+                <div class="text-center">
+                    <span id="days" class="text-3xl md:text-5xl font-bold block">00</span>
+                    <span class="text-[10px] uppercase tracking-widest opacity-30">Days</span>
+                </div>
+                <div class="text-center">
+                    <span id="hours" class="text-3xl md:text-5xl font-bold block">00</span>
+                    <span class="text-[10px] uppercase tracking-widest opacity-30">Hours</span>
+                </div>
+                <div class="text-center">
+                    <span id="minutes" class="text-3xl md:text-5xl font-bold block">00</span>
+                    <span class="text-[10px] uppercase tracking-widest opacity-30">Mins</span>
+                </div>
+                <div class="text-center text-pink-500">
+                    <span id="seconds" class="text-3xl md:text-5xl font-bold block">00</span>
+                    <span class="text-[10px] uppercase tracking-widest opacity-30">Secs</span>
+                </div>
+            </div>
+
+            <button id="unlock-btn" class="btn-modern group">
+                <span>Unlock Your Gift</span>
+                <i data-lucide="heart" class="w-5 h-5 group-hover:scale-125 transition-transform"></i>
+            </button>
+            <p class="text-white/20 text-[10px] mt-8 uppercase tracking-widest italic">Wait for the moment ❤️</p>
+        </div>
+    </section>
+
+    <!-- Main Content Wrapper -->
+    <main id="main-content" class="opacity-0 pointer-events-none">
+
+        <!-- Audio Control -->
+        <div class="fixed top-8 right-8 z-[100]">
+            <button id="audio-toggle" class="p-4 glass-card rounded-full hover:bg-white/5 transition-all">
+                <i data-lucide="music" class="w-6 h-6 text-pink-400"></i>
+            </button>
+            <audio id="bg-music" loop preload="metadata">
+                <source src="bg_music.mp4" type="audio/mp4">
+            </audio>
+        </div>
+
+        <!-- 2. HERO SECTION -->
+        <section id="hero" class="min-h-screen flex items-center justify-center relative px-4 text-center">
+            <div class="z-10">
+                <span class="text-pink-400 font-bold uppercase tracking-[0.5em] text-xs mb-8 block animate-pulse">Celebration of You</span>
+                <h2 class="text-6xl md:text-9xl text-luxury mb-8 text-gradient italic leading-tight">Happy Birthday <br> Brijisha ❤️</h2>
+                <p class="text-lg md:text-2xl font-light text-white/50 max-w-3xl mx-auto italic">"Every second spent with you is a second spent in paradise."</p>
+                <div class="mt-20 float">
+                    <i data-lucide="chevron-down" class="w-8 h-8 text-white/10 mx-auto"></i>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. PHOTO MEMORY SECTION -->
+        <section id="memories" class="min-h-screen py-32 flex flex-col items-center justify-center relative">
+            <div class="container mx-auto px-4 text-center section-reveal">
+                <h3 class="text-4xl md:text-6xl text-luxury italic mb-16 text-gradient">Timeless Moments</h3>
+
+                <div class="w-full max-w-6xl mx-auto h-[80vh] md:h-[90vh] glass-card overflow-hidden relative shadow-2xl">
+                    <div id="slideshow" class="w-full h-full">
+                        <!-- Slide 1 -->
+                        <div class="slide active">
+                            <img src="photo1.jpg" alt="Memory 1">
+                            <div class="slide-caption">Your family is the quiet strength behind your smile ❤️</div>
+                        </div>
+                        <!-- Slide 2 -->
+                        <div class="slide">
+                            <img src="photo2.jpg" alt="Memory 2">
+                            <div class="slide-caption">Every second with you is a gift...</div>
+                        </div>
+                        <!-- Slide 3 -->
+                        <div class="slide">
+                            <img src="photo3.jpeg" alt="Memory 3">
+                            <div class="slide-caption">Our smiles tell our story ❤️</div>
+                        </div>
+                        <!-- Slide 4 -->
+                        <div class="slide">
+                            <img src="photo4.jpeg" alt="Memory 4">
+                            <div class="slide-caption">Forever starts with you.</div>
+                        </div>
+                        <!-- Slide 5 -->
+                        <div class="slide">
+                            <img src="photo5.jpg" alt="Memory 5">
+                            <div class="slide-caption">Your smile makes my world brighter...</div>
+                        </div>
+                        <!-- Slide 6 -->
+                        <div class="slide">
+                            <img src="photo6.jpg" alt="Memory 6">
+                            <div class="slide-caption">To many more years of us ❤️</div>
+                        </div>
+                        <!-- Slide 7 -->
+                        <div class="slide">
+                            <img src="photo7.jpg" alt="Memory 7">
+                            <div class="slide-caption">The best is yet to come...</div>
+                        </div>
+                        <!-- Slide 8 -->
+                        <div class="slide">
+                            <img src="photo8.jpg" alt="Memory 8">
+                            <div class="slide-caption">I love you more every day... ❤️</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. ROMANTIC LETTER -->
+        <section id="letter" class="py-32 flex items-center justify-center relative px-4">
+            <div class="glass-card max-w-4xl w-full p-12 md:p-24 relative overflow-hidden section-reveal text-center">
+                <h4 class="text-4xl font-['Dancing_Script'] text-pink-400 mb-12">என் செல்லக் குட்டிக்கு, ❤️</h4>
+
+                <div class="space-y-10 text-xl font-light text-white/80 leading-relaxed italic">
+                    <p class="reveal-text">இன்று ஒரு சாதாரண நாள் இல்லை… என் வாழ்க்கைக்கு நிறம் சேர்த்த தேவதை இந்த உலகத்தில் பிறந்த நாள். ✨</p>
+                    <p class="reveal-text">நீ என் வாழ்க்கையில் வந்த பிறகு தான் “காதல்” என்னும் வார்த்தைக்கு உண்மையான அர்த்தம் என்ன என்று புரிந்தது.</p>
+                    <p class="reveal-text">உன் சிரிப்பு என் மனசுக்கு அமைதி, உன் கோபம் கூட எனக்கு அழகான கவிதை மாதிரி. 💖</p>
+                    <p class="reveal-text">நான் தினமும் சந்தோஷமாக இருக்க காரணம் நீ தான். என் கஷ்டமான நேரத்திலும் என்னை விட்டு போகாமல் என்னுடன் இருந்ததற்கு நன்றி டா செல்லம். 🥺</p>
+                    <p class="reveal-text">உன் Birthday-க்கு நான் பெரிய Gift கொடுக்க முடியாம இருந்தாலும், என் முழு மனசையும் உனக்காக கொடுத்துட்டேன். 💍</p>
+                    <p class="reveal-text">நீ சிரிக்கணும்… நீ சந்தோஷமாக இருக்கணும்… அதுக்காக நான் எதுவும் செய்ய தயாரா இருக்கேன். 🌹</p>
+                    <p class="reveal-text">ஒரு நாள் நம்ம இருவரும் சேர்ந்து நம்ம கனவுகளை வாழப் போறோம்… அந்த நாளை நான் ஒவ்வொரு நாளும் காத்திருக்கேன். ✨</p>
+                </div>
+
+                <div class="mt-20 pt-10 border-t border-white/5">
+                    <p class="text-3xl font-['Dancing_Script'] text-pink-400">Happy Birthday My Love ❤️</p>
+                    <p class="text-lg opacity-40 mt-4">என் வாழ்க்கையின் அழகான Chapter நீ தான். <br> I Love You So Much Hen… 💕</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Restoration: THEN & NOW Section (MOVED HERE) -->
+        <section id="then-now" class="py-32 relative">
+            <div class="container mx-auto px-4 text-center section-reveal">
+                <h3 class="text-3xl md:text-5xl text-luxury italic mb-20 text-gradient">The Journey of You</h3>
+                <div class="max-w-4xl mx-auto glass-card p-4 md:p-8">
+                    <img src="then_and_now.png" alt="Then and Now" class="w-full h-auto rounded-2xl shadow-2xl">
+                    <div class="mt-12">
+                        <p class="text-2xl font-['Dancing_Script'] text-pink-400">"You were adorable then… And you are the most beautiful person now ❤️"</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. PROPOSAL SECTION -->
+        <section id="proposal" class="min-h-screen py-32 flex flex-col items-center justify-center relative px-4 text-center">
+            <div class="section-reveal">
+                <h2 class="text-5xl md:text-8xl text-luxury italic mb-16 text-gradient">One Last Thing...</h2>
+                <button id="start-proposal" class="btn-modern">
+                    <span>Open Your Surprise</span>
+                    <i data-lucide="play" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <div id="video-container" class="fixed inset-0 z-[200] hidden bg-black/98 items-center justify-center p-4">
+                <div class="w-full max-w-5xl glass-card p-2 relative shadow-[0_0_100px_rgba(255,45,117,0.4)]">
+                    <video id="proposal-video" class="w-full h-auto rounded-3xl" playsinline preload="auto">
+                        <source src="proposal_video.mp4" type="video/mp4">
+                    </video>
+                    <div id="video-overlay-play" class="absolute inset-0 z-30 flex items-center justify-center bg-black/40 cursor-pointer">
+                        <div class="w-24 h-24 rounded-full bg-pink-500 flex items-center justify-center text-white scale-125">
+                            <i data-lucide="play" class="w-10 h-10 ml-1 fill-current"></i>
+                        </div>
+                    </div>
+                    <button id="close-video" class="absolute -top-12 -right-12 text-white/40 hover:text-white transition-all">
+                        <i data-lucide="x" class="w-12 h-12"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. FINAL ENDING -->
+        <section id="ending" class="min-h-screen flex flex-col items-center justify-center text-center px-4 relative">
+            <div class="z-10 section-reveal">
+                <h2 class="text-6xl md:text-9xl text-luxury text-gradient mb-12 italic">Happy Birthday ❤️</h2>
+                <p class="text-2xl font-light text-white/40 mb-16 italic">"You are my forever and always, Brijisha."</p>
+                <button id="replay-btn" class="btn-modern">
+                    <i data-lucide="heart" class="w-5 h-5"></i>
+                    <span>Restart the Memories</span>
+                </button>
+            </div>
+            <div id="fireworks-canvas-container" class="absolute inset-0 pointer-events-none"></div>
+        </section>
+
+        <footer class="py-20 text-center text-white/10 text-xs uppercase tracking-[0.5em] font-bold">
+            Brijisha • May 9th, 2026 • Always Yours
+        </footer>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
